@@ -26,17 +26,6 @@ bot.hears("Verify", (ctx) => {
   ctx.reply("We need to ver");
 });
 
-// greet new users when they join a group
-bot.on("new_chat_members", async (ctx) => {
-  const newMembers = ctx.message.new_chat_members;
-  for (const member of newMembers) {
-    const name = member.first_name || "there";
-    await ctx.reply(
-      `👋 Welcome to the group, ${name}!\nTo get started, please DM me and press "Verify".`
-    );
-  }
-});
-
 // additional handlers
 bot.help((ctx) => ctx.reply("Send me a sticker"));
 bot.on(message("sticker"), (ctx) => ctx.reply("👍"));
