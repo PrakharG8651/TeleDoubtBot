@@ -1,9 +1,11 @@
-require("dotenv").config();
-const { Telegraf, Markup } = require("telegraf");
-const fs = require("fs");
-const path = require("path");
-const { message } = require("telegraf/filters");
-import { StudentData } from "./StudentData/StudentSchema";
+import dotenv from "dotenv";
+dotenv.config();
+
+import { Telegraf, Markup } from "telegraf";
+import fs from "fs";
+import path from "path";
+import { message } from "telegraf/filters";
+import { StudentData } from "./StudentData/StudentSchema.js";
 
 // bot setup
 const bot = new Telegraf(process.env.BOT_TOKEN);
