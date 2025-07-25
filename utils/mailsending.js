@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import nodemailer from "nodemailer";
+import optgeneration from "./otpgeneration.js";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -11,7 +12,8 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export default async function sendOtp(studentMailId, otp) {
+export default async function sendOtp(studentMailId) {
+  const otp = await optgeneration();
   try {
     // Send the email using nodemailer
     const info = await transporter.sendMail({
@@ -21,7 +23,7 @@ export default async function sendOtp(studentMailId, otp) {
       text: otp,
       html: `<p>Your OTP is: <b>${otp}</b></p>`,
     });
-
+    return otp;
     console.log("Message sent:", info.messageId);
   } catch (error) {
     console.error("Error sending email:", error);

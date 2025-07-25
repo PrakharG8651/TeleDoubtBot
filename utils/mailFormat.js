@@ -1,11 +1,12 @@
 const mailformat = /^[a-z][a-z0-9]*[0-9]{2}@iitk\.ac\.in$/;
-//The regrex patternf for IITK mail format
 
-//The functions t/f
+// The function returns true/false for IITK email validity
 export default function checkMailFormat(mailId) {
-  mailId = mailId.trim();
+  const sanitized = mailId.trim();
+
   if (sanitized.length > 100 || sanitized.includes("..")) {
     return false;
   }
-  return mailformat.test(mailId);
+
+  return mailformat.test(sanitized);
 }
