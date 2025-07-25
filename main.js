@@ -1,9 +1,11 @@
-require("dotenv").config();
-const { Telegraf, Markup } = require("telegraf");
-const fs = require("fs");
-const path = require("path");
-const { message } = require("telegraf/filters");
-import { StudentData } from "./StudentData/StudentSchema";
+import dotenv from "dotenv";
+dotenv.config();
+
+import { Telegraf, Markup } from "telegraf";
+import fs from "fs";
+import path from "path";
+import { message } from "telegraf/filters";
+import { StudentData } from "./StudentData/StudentSchema.js";
 
 // bot setup
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -22,6 +24,17 @@ bot.start((ctx) => {
 
 bot.hears("Verify", (ctx) => {
   ctx.reply("We need to ver");
+});
+
+// greet new users when they join a group
+bot.on("new_chat_members", async (ctx) => {
+  const newMembers = ctx.message.new_chat_members;
+  for (const member of newMembers) {
+    const name = member.first_name || "there";
+    await ctx.reply(
+      `👋 Welcome to the group, ${name}!\nTo get started, please DM me and press "Verify".`
+    );
+  }
 });
 
 // additional handlers
