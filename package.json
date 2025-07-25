@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^17.2.0",
+    "dotenv": "^17.2.1",
     "mongoose": "^8.16.4",
     "nodemailer": "^7.0.5",
     "otp-generator": "^4.0.1",
