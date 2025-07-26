@@ -63,12 +63,13 @@ bot.on("text", async (ctx) => {
     if (checkMailFormat(userEmail)) {
       const mail = userEmail.trim();
       const otp = await sendOtp(mail);
-      ctx.reply("Please enter the otp: ");
       awaitOtp.set(userId, otp);
       awaitingEmail.delete(userId); // <-- clear email state
       console.log("The mail is succesfully send");
     }
   } else if (awaitOtp.has(userId)) {
+    await ctx.reply("Please enter the otp: ");
+
     let userOtp = ctx.message.text;
     userOtp = userOtp.trim();
     if (awaitOtp.get(userId) === userOtp) {
