@@ -58,18 +58,20 @@ bot.action("start_verification", async (ctx) => {
 
 bot.on("text", async (ctx) => {
   const userId = ctx.from.id;
+  await ctx.reply(ctx.from.id);
+
   if (awaitingEmail.has(userId)) {
     let userEmail = ctx.message.text;
     if (checkMailFormat(userEmail)) {
       const mail = userEmail.trim();
       const otp = await sendOtp(mail);
       awaitOtp.set(userId, otp);
+      await ctx.reply("Please enter the otp: ");
+
       awaitingEmail.delete(userId); // <-- clear email state
       console.log("The mail is succesfully send");
     }
   } else if (awaitOtp.has(userId)) {
-    await ctx.reply("Please enter the otp: ");
-
     let userOtp = ctx.message.text;
     userOtp = userOtp.trim();
     if (awaitOtp.get(userId) === userOtp) {
