@@ -64,29 +64,8 @@ function getAllSubjectIds() {
   return subjectMap;
 }
 
-/**
- * Check if a subject exists in the subjects list
- * @param {string} subjectCode - The subject code to check
- * @returns {boolean} - True if subject exists
- */
-function subjectExists(subjectCode) {
-  const subjects = getAllSubjects();
-  return subjects.has(subjectCode);
-}
-
-/**
- * Get all available subject codes as an array
- * @returns {string[]} - Array of all subject codes
- */
-function getSubjectList() {
-  const subjects = getAllSubjects();
-  return Array.from(subjects);
-}
+const subjectMap = getAllSubjectIds();
 
 export {
-  getSubjectId,
-  getAllSubjects,
-  getAllSubjectIds,
-  subjectExists,
-  getSubjectList,
+    subjectMap
 };
